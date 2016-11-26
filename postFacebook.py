@@ -8,45 +8,364 @@ from django.http.response import HttpResponse
 
 
 class Facebook:
-
+  
   @staticmethod
   def post_facebook_message(fbid, recevied_message):
-  #  client = textrazor.TextRazor(extractors=["entities", "topics"])
-  #  response = client.analyze("I am really sad right now".decode('utf-8'))
-  #  #print(response.entities())
-  #
-  #  for entity in response.entities():
-  #      print(entity)
+    #  client = textrazor.TextRazor(extractors=["entities", "topics"])
+    #  response = client.analyze("I am really sad right now".decode('utf-8'))
+    #  #print(response.entities())
+    #
+    #  for entity in response.entities():
+    #      print(entity)
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=EAAR79XI6ZBqUBAAUhLg2LChl0xI8j4lZC4fIOZAFic9O4Kl0xJYUnCJW81G5kcdZAVBPOepprGCn8Bm4WkRdHs3Pn52IqtDnIlsLq2LIDGro91sFo0Dlz7SsYWkFlvaSu0qnFSxgbnUI22QX8lIgJdZBvkRaM1EPtqgDegqPOIgZDZD'
-    url = "https://petersapparel.parseapp.com"
+    url="https://petersapparel.parseapp.com"
+    youtubeurl1="https://www.youtube.com/watch?v=y6Sxv-sUYtM"
+    youtubeurl2="https://www.youtube.com/watch?v=4N3N1MlvVc4"
+    viewurl1="https://au.pinterest.com/search/pins/?q=happy&rs=typed&term_meta[]=happy%7Ctyped"
+    viewurl2="https://au.pinterest.com/search/pins/?q=sad&rs=typed&term_meta[]=sad%7Ctyped"
+    movieurl1="https://www.justwatch.com/au/provider/stan?genres=cmy,fml"
+    movieurl2="https://www.justwatch.com/au/provider/stan?genres=war,hrr,rma,drm"
+    shopurl1="https://www.amazon.com/"
     
     #user_details_url = "https://graph.facebook.com/v2.8/" + fbid
     #user_details_params = {'fields':'first_name,last_name,profile_pic', 'access_token':'<page-access-token>'}
     # user_details = requests.get(user_details_url, user_details_params).json()
     # print(user_details)
     # name = user_details['first_name']
-    
-    
-    
-    responses = {'general':{"recipient":{"id":fbid}, "message":{"text": "General"}},
-      'emotions': {"recipient":{"id":fbid}, "message":{"text": "Emotions"}},
-        'guide': {"recipient":{"id":fbid}, "message":{"text": "guide"}},
-          'write': {"recipient":{"id":fbid}, "message":{"text": "Hi there. Welcome to Your Journal. Here is a space where you can write a journal whenever you please and recieve back an analysis of your text.\nSpecifically, we will be performing: \n\nNLP\nSentiment Analysis\nTone Analysis\n\nPlease write here and enter here."}},
-          'load': {
-        "recipient":{
-          "id":fbid
-    },
-      "sender_action":"typing_on"
-      },
-        'startup': {"recipient":{"id":fbid}, "message":{"text": "Hey Choenden! Welcome to my platform. I can help you in a variety of ways depending on your mood and can even log some journals for you. :)"}} ,
-          'startup2':{"recipient":{"id":fbid}, "message":{"text": "Tell me things like: \n\n I want happy stuff \n I want sad stuff \n I want motivating stuff \n\n Or choose from the options below or enter 'Help'."}}  ,
-            'startup3': {
-              "recipient":{
-                "id":fbid
-  },
-    "message":{
-      "attachment":{
-        "type":"template",
+    cute = {
+  "recipient":{
+    "id":fbid
+  }, "message": {
+    "attachment": {
+      "type": "template",
+        "payload": {
+          "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+                         {
+                         "title": "Ingrid Michaelson - They Way I Am",
+                         "image_url": "http://www.mtv.com/crop-images/2013/09/04/ingrid-michaelson-shervin-lainez-2010-rgb.jpg",
+                         "subtitle": "Enjoy this happy song we found for you",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": youtubeurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": youtubeurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Listen",
+                                     "type": "web_url",
+                                     "url": youtubeurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": youtubeurl1                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Explore Some Pins",
+                         "image_url": "https://s-media-cache-ak0.pinimg.com/564x/75/47/a1/7547a12cf5e71cfea982ccf15deece9d.jpg",
+                         "subtitle": "The options are endless",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": viewurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": viewurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": viewurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": viewurl1
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Watch some movies",
+                         "image_url": "http://www.herinterest.com/wp-content/uploads/2015/01/20-Cute-Romance-Movies_10.jpg",
+                         "subtitle": "Here's what we recommend",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": movieurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": movieurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Dive In",
+                                     "type": "web_url",
+                                     "url": movieurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": movieurl1
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Treat Yourself",
+                         "image_url": "https://www.hackerx.org/jobs/wp-content/uploads/2013/06/Amazon-logo.png",
+                         "subtitle": "Shopping Is Easy",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": shopurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": shopurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": shopurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": shopurl1
+                                     }
+                                     ]
+                         }
+                         ],
+              "buttons": [
+                          {
+                          "title": "View More",
+                          "type": "postback",
+                          "payload": "payload"
+                          }
+                          ]
+}
+}
+}
+}
+  happy = {
+  "recipient":{
+    "id":fbid
+}, "message": {
+  "attachment": {
+    "type": "template",
+      "payload": {
+        "template_type": "list",
+          "top_element_style": "compact",
+            "elements": [
+                         {
+                         "title": "Happy - Pharrell Williams",
+                         "image_url": "https://upload.wikimedia.org/wikipedia/en/2/23/Pharrell_Williams_-_Happy.jpg",
+                         "subtitle": "Enjoy this happy song we found for you",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": youtubeurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": youtubeurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Listen",
+                                     "type": "web_url",
+                                     "url": youtubeurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": youtubeurl1                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Explore Some Pins",
+                         "image_url": "https://s-media-cache-ak0.pinimg.com/736x/96/26/33/962633096e9f47451bdc6131656a3fa4.jpg",
+                         "subtitle": "The options are endless",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": viewurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": viewurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": viewurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": viewurl1
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Watch some movies",
+                         "image_url": "http://www.classic-play.com/wp-content/uploads/2012/06/happy-poster-preview.jpg",
+                         "subtitle": "Here's what we recommend",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": movieurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": movieurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Dive In",
+                                     "type": "web_url",
+                                     "url": movieurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": movieurl1
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Treat Yourself",
+                         "image_url": "https://www.hackerx.org/jobs/wp-content/uploads/2013/06/Amazon-logo.png",
+                         "subtitle": "Shopping Is Easy",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": shopurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": shopurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": shopurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": shopurl1
+                                     }
+                                     ]
+                         }
+                         ],
+              "buttons": [
+                          {
+                          "title": "View More",
+                          "type": "postback",
+                          "payload": "payload"
+                          }
+                          ]
+}
+}
+}
+}
+  sad = {
+  "recipient":{
+    "id":fbid
+}, "message": {
+  "attachment": {
+    "type": "template",
+      "payload": {
+        "template_type": "list",
+          "top_element_style": "compact",
+            "elements": [
+                         {
+                         "title": "Mad World - Gary Jules",
+                         "image_url": "http://images.amazon.com/images/P/B0001IXTOU.01.LZZZZZZZ.jpg",
+                         "subtitle": "Enjoy this happy song we found for you",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": youtubeurl2,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": youtubeurl2
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Listen",
+                                     "type": "web_url",
+                                     "url": youtubeurl2,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": youtubeurl2                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Explore Some Pins",
+                         "image_url": "http://www.publicdomainpictures.net/pictures/20000/nahled/sad-man-and-rain.jpg",
+                         "subtitle": "The options are endless",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": viewurl2,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": viewurl2
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": viewurl2,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": viewurl2
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Watch some movies",
+                         "image_url": "https://s-media-cache-ak0.pinimg.com/originals/8b/5d/0b/8b5d0b948c67f2dee3a42b0b985b4f76.jpg",
+                         "subtitle": "Here's what we recommend",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": movieurl2,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": movieurl2
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "Dive In",
+                                     "type": "web_url",
+                                     "url": movieurl2,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": movieurl2
+                                     }
+                                     ]
+                         },
+                         {
+                         "title": "Binge Eat",
+                         "image_url": "https://pbs.twimg.com/profile_images/727390716192657408/2z3TnDsT.jpg",
+                         "subtitle": "Only A Click Away",
+                         "default_action": {
+                         "type": "web_url",
+                         "url": shopurl1,
+                         "messenger_extensions": True,
+                         "webview_height_ratio": "tall",
+                         "fallback_url": shopurl1
+                         },
+                         "buttons": [
+                                     {
+                                     "title": "View",
+                                     "type": "web_url",
+                                     "url": shopurl1,
+                                     "messenger_extensions": True,
+                                     "webview_height_ratio": "tall",
+                                     "fallback_url": shopurl1
+                                     }
+                                     ]
+                         }
+                         ],
+              "buttons": [
+                          {
+                          "title": "View More",
+                          "type": "postback",
+                          "payload": "payload"
+                          }
+                          ]
+}
+}
+}
+}
+  startup3 = {
+    "recipient":{
+      "id":fbid
+},
+  "message":{
+    "attachment":{
+      "type":"template",
         "payload":{
           "template_type":"generic",
           "elements":[
@@ -67,8 +386,8 @@ class Facebook:
                                  },
                                  {
                                  "type":"postback",
-                                 "title":"Motivating",
-                                 "payload":"Motivating"
+                                 "title":"Cute",
+                                 "payload":"Cute"
                                  }
                                  ]
                       },
@@ -85,15 +404,13 @@ class Facebook:
                                  ]
                       }
                       ]
-    }
+}
+}
   }
   }
-  },
-    'happy': {"recipient":{"id":fbid}, "message":{"text": "You are happy"}},
-      'sad': {"recipient":{"id":fbid}, "message":{"text": "You are sad"}},
-        'help': {
-          "recipient":{
-            "id":fbid
+    help = {
+      "recipient":{
+        "id":fbid
   },
     "message":{
       "attachment":{
@@ -138,123 +455,40 @@ class Facebook:
   }
   }
   }
-  },
-    'movies':{
-  "recipient":{
-    "id":fbid
-    }, "message": {
-      "attachment": {
-        "type": "template",
-          "payload": {
-            "template_type": "list",
-              "elements": [
-                           {
-                           "title": "Movies for you",
-                           "image_url": "https://images.tenplay.com.au/~/media/TV%20Shows/Movies%20Hub/Movies_Logo_500x281.jpg",
-                           "subtitle": "Choose the one for you",
-                           "default_action": {
-                           "type": "web_url",
-                           "url": url,
-                           "messenger_extensions": True,
-                           "webview_height_ratio": "tall",
-                           "fallback_url": url
-                           },
-                           "buttons": [
-                                       {
-                                       "title": "View",
-                                       "type": "web_url",
-                                       "url": url,
-                                       "messenger_extensions": True,
-                                       "webview_height_ratio": "tall",
-                                       "fallback_url": url                                     }
-                                       ]
-                           },
-                           {
-                           "title": "IronMan 3",
-                           "image_url": "https://images.tenplay.com.au/~/media/TV%20Shows/Movies%20Hub/Movies_Logo_500x281.jpg",
-                           "subtitle": "100% Cotton, 200% Comfortable",
-                           "default_action": {
-                           "type": "web_url",
-                           "url": url,
-                           "messenger_extensions": True,
-                           "webview_height_ratio": "tall",
-                           "fallback_url": url
-                           },
-                           "buttons": [
-                                       {
-                                       "title": "Watch Now",
-                                       "type": "web_url",
-                                       "url": url,
-                                       "messenger_extensions": True,
-                                       "webview_height_ratio": "tall",
-                                       "fallback_url": url
-                                       }
-                                       ]
-                           },
-                           {
-                           "title": "Avengers 2",
-                           "image_url": "https://images.tenplay.com.au/~/media/TV%20Shows/Movies%20Hub/Movies_Logo_500x281.jpg",
-                           "subtitle": "100% Cotton, 200% Comfortable",
-                           "default_action": {
-                           "type": "web_url",
-                           "url": url,
-                           "messenger_extensions": True,
-                           "webview_height_ratio": "tall",
-                           "fallback_url": url
-                           },
-                           "buttons": [
-                                       {
-                                       "title": "Watch Now",
-                                       "type": "web_url",
-                                       "url": url,
-                                       "messenger_extensions": True,
-                                       "webview_height_ratio": "tall",
-                                       "fallback_url": url
-                                       }
-                                       ]
-                           },
-                           {
-                           "title": "I am Groot",
-                           "image_url": "https://images.tenplay.com.au/~/media/TV%20Shows/Movies%20Hub/Movies_Logo_500x281.jpg",
-                           "subtitle": "100% Cotton, 200% Comfortable",
-                           "default_action": {
-                           "type": "web_url",
-                           "url": url,
-                           "messenger_extensions": True,
-                           "webview_height_ratio": "tall",
-                           "fallback_url": url
-                           },
-                           "buttons": [
-                                       {
-                                       "title": "Watch Now",
-                                       "type": "web_url",
-                                       "url": url,
-                                       "messenger_extensions": True,
-                                       "webview_height_ratio": "tall",
-                                       "fallback_url": url
-                                       }
-                                       ]
-                           }
-                           ],
-                "buttons": [
-                            {
-                            "title": "View More",
-                            "type": "postback",
-                            "payload": "payload"
-                            }
-                            ]
-      }
-  }
-  }
-
-  }
   }
     
-    value = recevied_message.lower()
+    
+    
+    
+    
+    responses = {'cute': cute,
+      'general':{"recipient":{"id":fbid}, "message":{"text": "General"}},
+      'emotions': {"recipient":{"id":fbid}, "message":{"text": "Emotions"}},
+        'guide': {"recipient":{"id":fbid}, "message":{"text": "guide"}},
+          'write': {"recipient":{"id":fbid}, "message":{"text": "Hi there. Welcome to Your Journal. Here is a space where you can write an entry whenever you please and recieve back an analysis of your text.\nSpecifically, we will be performing: \n\nNLP\nSentiment Analysis\nTone Analysis\n\nPlease write here and enter here."}},
+          'load': {
+        "recipient":{
+          "id":fbid
+    },
+      "sender_action":"typing_on"
+      },
+        'startup': {"recipient":{"id":fbid}, "message":{"text": "Hey Choenden! Welcome to my platform. I can help you in a variety of ways depending on your mood and can even log some journals for you. :)"}} ,
+          'startup2':{"recipient":{"id":fbid}, "message":{"text": "Tell me things like: \n\n I want happy stuff \n I want sad stuff \n I want motivating stuff \n\n Or choose from the options below or enter 'Help'."}},
+            
+            'i want cute stuff' : cute,
+            'i want happy stuff' : happy,
+            'i want sad stuff' : sad,
+            'startup3': startup3,
+            'happy': happy,
+            'sad': sad,
+            'help': help
+
+}
+  value = recevied_message.lower()
     if value in responses:
       txt_back = responses[value]
-    else:
-      txt_back = {"recipient":{"id":fbid}, "message":{"text": "I didin't understand you. Sorry! Type 'Help' to see my features! :)"}}
+  else:
+    txt_back = {"recipient":{"id":fbid}, "message":{"text": "I didin't understand you. Sorry! Type 'Help' to see my features! :)"}}
     
     
     response_msg = json.dumps(txt_back)
