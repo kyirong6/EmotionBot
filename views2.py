@@ -62,13 +62,19 @@ def post_facebook_message(fbid, recevied_message):
     print(entity)
   post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=EAAR79XI6ZBqUBAAUhLg2LChl0xI8j4lZC4fIOZAFic9O4Kl0xJYUnCJW81G5kcdZAVBPOepprGCn8Bm4WkRdHs3Pn52IqtDnIlsLq2LIDGro91sFo0Dlz7SsYWkFlvaSu0qnFSxgbnUI22QX8lIgJdZBvkRaM1EPtqgDegqPOIgZDZD'
   url = "https://petersapparel.parseapp.com"
-  
-  
-  responses = {'startup': {"recipient":{"id":fbid}, "message":{"text": "Hey Choenden! Welcome to my platform. I can help you in a variety of ways depending on your mood and can even log some journals for you. :)"}} ,
-    'startup2':{"recipient":{"id":fbid}, "message":{"text": "Please choose from the options below or enter 'Help'."}}  ,
-      'startup3': {
-        "recipient":{
-          "id":fbid
+
+
+  responses = {'load': {
+    "recipient":{
+      "id":fbid
+    },
+      "sender_action":"typing_on"
+  },
+    'startup': {"recipient":{"id":fbid}, "message":{"text": "Hey Choenden! Welcome to my platform. I can help you in a variety of ways depending on your mood and can even log some journals for you. :)"}} ,
+      'startup2':{"recipient":{"id":fbid}, "message":{"text": "Please choose from the options below or enter 'Help'."}}  ,
+        'startup3': {
+          "recipient":{
+            "id":fbid
 },
   "message":{
     "attachment":{
