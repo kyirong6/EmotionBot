@@ -9,6 +9,9 @@ from django.http.response import HttpResponse
 class Helper:
   
   @staticmethod
-  def sentimentHelper(self, Entry):
-    print("helper")
-    return -1
+  def sentimentHelper(entry):
+    response = requests.post('http://sentiment.vivekn.com/api/batch/',headers={"Content-Type": "application/json"},data=json.dumps([entry]))
+    return response.json()
+
+
+
