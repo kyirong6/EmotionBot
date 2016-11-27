@@ -1,9 +1,10 @@
-import json, requests, random, re
+import json, requests, random, re, sys
 from pprint import pprint
 
 from django.views import generic
 from django.http.response import HttpResponse
-
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 class Helper:
   
@@ -14,5 +15,4 @@ class Helper:
     response = requests.get(url)
     value = response.json()['polarity']
     return value
-
-
+# return "positive"

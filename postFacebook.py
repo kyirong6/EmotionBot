@@ -27,6 +27,10 @@ class Facebook:
     movieurl2="https://www.justwatch.com/au/provider/stan?genres=war,hrr,rma,drm"
     shopurl1="https://www.amazon.com/"
     
+    
+    
+    
+    
     #user_details_url = "https://graph.facebook.com/v2.8/" + fbid
     #user_details_params = {'fields':'first_name,last_name,profile_pic', 'access_token':'<page-access-token>'}
     # user_details = requests.get(user_details_url, user_details_params).json()
@@ -459,21 +463,26 @@ class Facebook:
     
     
     
-    
-    
     responses = {'cute': cute,
-      'general':{"recipient":{"id":fbid}, "message":{"text": "General"}},
-      'emotions': {"recipient":{"id":fbid}, "message":{"text": "Emotions"}},
-        'guide': {"recipient":{"id":fbid}, "message":{"text": "guide"}},
+      'message': {"recipient":{"id":fbid}, "message":{"text": "Here are some things we found for you..."}},
+      'message2': {"recipient":{"id":fbid}, "message":{"text": "According to our calculations you've had a positive entry! Here are some things for you..."}},
+        'message3': {"recipient":{"id":fbid}, "message":{"text": "According to our calculations you've had an entry more on the negative side. Here are some things for you..."}},
+      'positive': happy,
+      'negative': sad,
+      'neutral': {"recipient":{"id":fbid}, "message":{"text": "You are Neutral :) The options are up to you!"}},
+      'general':{"recipient":{"id":fbid}, "message":{"text": "Hey There... I'm your personal bot and I'm here to support your moods and brighten up your day if you need me.\n\nI feed you music, movies, food, shopping opportunities, and even journal entries. \n\nClick on 'The Emotions' or 'Our Goal Together' to learn more!"}},
+      
+      'emotions': {"recipient":{"id":fbid}, "message":{"text": "For now we can cater to: \n\nHappy\nSad\nCute\n\nWith the touch of a button we will give you recommendations that will support your moods such as movies, food and shopping opportunities.\n\nRather than having to do many different searches for your state of mind, our chatbot can give you exactly what you need when you need it."}},
+        'guide': {"recipient":{"id":fbid}, "message":{"text": "Use your journal to tell me how your day went and I'll give you a report and keep track of how your mood has changed throughout our little chats. \nWe are using tools such as:\n\n Sentiment Analysis\n Natural Language Processing\n Tone Analysis\n\nThis space is a safe place for you and whatever you need. :)"}},
           'write': {"recipient":{"id":fbid}, "message":{"text": "Hi there. Welcome to Your Journal. Here is a space where you can write an entry whenever you please and recieve back an analysis of your text.\nSpecifically, we will be performing: \n\nNLP\nSentiment Analysis\nTone Analysis\n\nPlease write here and enter here."}},
           'load': {
         "recipient":{
           "id":fbid
-    },
-      "sender_action":"typing_on"
+  },
+    "sender_action":"typing_on"
       },
         'startup': {"recipient":{"id":fbid}, "message":{"text": "Hey Choenden! Welcome to my platform. I can help you in a variety of ways depending on your mood and can even log some journals for you. :)"}} ,
-          'startup2':{"recipient":{"id":fbid}, "message":{"text": "Tell me things like: \n\n I want happy stuff \n I want sad stuff \n I want motivating stuff \n\n Or choose from the options below or enter 'Help'."}},
+          'startup2':{"recipient":{"id":fbid}, "message":{"text": "Tell me things like: \n\n I want happy stuff \n I want sad stuff \n I want motivating stuff \n\nOr choose from the options below or enter 'Help'."}},
             
             'i want cute stuff' : cute,
             'i want happy stuff' : happy,
@@ -485,7 +494,7 @@ class Facebook:
 
 }
   value = recevied_message.lower()
-    if value in responses:
+    if (value in responses):
       txt_back = responses[value]
   else:
     txt_back = {"recipient":{"id":fbid}, "message":{"text": "I didin't understand you. Sorry! Type 'Help' to see my features! :)"}}
